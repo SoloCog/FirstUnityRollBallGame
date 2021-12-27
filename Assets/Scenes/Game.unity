@@ -4140,6 +4140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerGold: 0
+  goldRequiredForLevel: 6
   playerGoldText: {fileID: 197862234}
   RoundTimerText: {fileID: 2115221564}
 --- !u!4 &1972836402
