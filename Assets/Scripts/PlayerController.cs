@@ -10,13 +10,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerHorizontalInput;
     [SerializeField] private float playerVerticalInput;
 
+    [SerializeField] private GameManager gameManager;
+
 
     
     // Start is called before the first frame update
     void Start()
     {
-
-        playerRigidBody = playerGameobject.GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerRigidBody = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -37,4 +39,15 @@ public class PlayerController : MonoBehaviour
         playerRigidBody.AddTorque(Vector3.left.normalized * playerHorizontalInput * userForce * Time.deltaTime, ForceMode.Force);
         playerRigidBody.AddTorque(Vector3.back.normalized * playerVerticalInput * userForce * Time.deltaTime, ForceMode.Force);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "FinishArea"){
+            gameManager.RoundComplete = true;
+        }
+        if(other.gameObject.tag == "StartArea"){
+            gameManager.RoundComplete = false;
+        }
+    }
+    
 }

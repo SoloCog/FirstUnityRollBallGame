@@ -16,7 +16,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerGoldText;
     [SerializeField] private TextMeshProUGUI RoundTimerText;
 
+    [SerializeField] private bool roundComplete = false;
+
     private float RoundTimer;
+
+    public bool RoundComplete{
+        set{
+            Debug.Log("Setting Value");
+            roundComplete = value;
+        }
+        get{
+            return roundComplete;
+        }
+    }
 
     public int PlayerGold{
         set{
@@ -39,7 +51,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RoundTimer = Time.time;
+        if(roundComplete == false){
+            RoundTimer = Time.time;
+        }
         
         playerGoldText.text = "Gold " + playerGold.ToString() + "/" + goldRequiredForLevel;
         RoundTimerText.text = Mathf.FloorToInt(RoundTimer % 60 ).ToString() +"." + Mathf.FloorToInt((RoundTimer % 1) * 100).ToString(); 
